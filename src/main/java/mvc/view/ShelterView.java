@@ -1,5 +1,8 @@
 package mvc.view;
 
+import java.awt.Font;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,6 +15,11 @@ public class ShelterView extends JFrame {
 	
 	private JFrame frame;
 	private JPanel panel;
+	private JButton addButton;
+	private JButton removeButton;
+	private JButton viewDetailsButton;
+	private JButton saveButton;
+	private JButton adoptButton;
 	
 	public ShelterView() {
 		initialize();
@@ -27,7 +35,25 @@ public class ShelterView extends JFrame {
 		frame.setContentPane(panel);
 		frame.getContentPane().setLayout(null);
 		
-		//
+		addButton = new JButton("Add");
+		addButton.setBounds(20, 20, 100, 40);
+		panel.add(addButton);
+		
+		removeButton = new JButton("Remove");
+		removeButton.setBounds(20, 60, 100, 40);
+		panel.add(removeButton);
+		
+		viewDetailsButton = new JButton("Details");
+		viewDetailsButton.setBounds(20, 100, 100, 40);
+		panel.add(viewDetailsButton);
+		
+		saveButton = new JButton("Save");
+		saveButton.setBounds(20, 140, 100, 40);
+		panel.add(saveButton);
+		
+		adoptButton = new JButton("Adopt");
+		adoptButton.setBounds(20, 180, 100, 40);
+		panel.add(adoptButton);
 	}
 
 }
