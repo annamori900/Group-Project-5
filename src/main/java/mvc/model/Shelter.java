@@ -22,7 +22,7 @@ public class Shelter<T extends Pet> {
 	public void setPets(ArrayList<T> pets) {
 		this.pets = pets;
 	}
-	
+
 	public void sortByName() {
 		Collections.sort(pets);
 	}

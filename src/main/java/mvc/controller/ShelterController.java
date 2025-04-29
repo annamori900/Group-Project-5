@@ -18,5 +18,21 @@ public class ShelterController {
 	public void initiate() {
 		view.setVisible(true);
 	}
+	
+	public void addPet(Pet pet) {
+		model.getPets().add(pet);
+	}
+	
+	public void removePet(Pet pet) {
+		model.getPets().remove(pet);
+	}
+	
+	public void adoptPet(Pet pet) {
+		if (pet.isAdopted()) {
+			System.out.println(pet.getName() + " has already been adoped.");
+			return;
+		}
+		pet.setAdopted(true);
+	}
 
 }
