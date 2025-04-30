@@ -9,10 +9,11 @@ public class ShelterController {
 	private Shelter<Pet> model;
 	private ShelterView view;
 	
+	@SuppressWarnings("deprecation")
 	public ShelterController(Shelter<Pet> model, ShelterView view) {
 		this.model = model;
 		this.view = view;
-		
+		model.addObserver(view);
 	}
 	
 	public void initiate() {
