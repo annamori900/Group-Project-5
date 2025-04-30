@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import mvc.model.pets.Pet;
 
 import javax.swing.JList;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("deprecation")
 public class ShelterView extends JFrame implements Observer {
@@ -58,7 +59,7 @@ public class ShelterView extends JFrame implements Observer {
 		panel.add(removeButton);
 		
 		viewDetailsButton = new JButton("Details");
-		viewDetailsButton.setBounds(20, 100, 100, 40);
+		viewDetailsButton.setBounds(20, 180, 100, 40);
 		panel.add(viewDetailsButton);
 		
 		saveButton = new JButton("Save");
@@ -66,9 +67,13 @@ public class ShelterView extends JFrame implements Observer {
 		panel.add(saveButton);
 		
 		adoptButton = new JButton("Adopt");
-		adoptButton.setBounds(20, 180, 100, 40);
+		adoptButton.setBounds(20, 100, 100, 40);
 		panel.add(adoptButton);
 		
+		String[] comboBoxOptions = {"Name", "Age", "Species"};
+		JComboBox<String> comboBox = new JComboBox<>(comboBoxOptions);
+		comboBox.setBounds(20, 230, 100, 20);
+		panel.add(comboBox);
 		
 	}
 	
