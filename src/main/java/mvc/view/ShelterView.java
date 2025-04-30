@@ -76,6 +76,10 @@ public class ShelterView extends JFrame implements Observer {
 		removeButton.addActionListener(l);
 	}
 	
+	public DefaultListModel<Pet> getPetList() {
+		return (DefaultListModel<Pet>) petList.getModel();
+	}
+	
 	public int getSelectedPet() {
 		return petList.getSelectedIndex();
 	}
