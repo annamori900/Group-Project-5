@@ -77,6 +77,10 @@ public class ShelterView extends JFrame implements Observer {
 		
 	}
 	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
 	public void addListenerToRemoveButton(ActionListener l) {
 		removeButton.addActionListener(l);
 	}

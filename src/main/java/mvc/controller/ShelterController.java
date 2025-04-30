@@ -22,7 +22,7 @@ public class ShelterController {
 	}
 	
 	public void initiate() {
-		view.setVisible(true);
+		view.getFrame().setVisible(true);
 	}
 	
 	public void addPet(Pet pet) {
