@@ -8,7 +8,7 @@ public class ExoticAnimalAdapter extends Pet {
 	private ExoticAnimal exoticAnimal;
 
 	public ExoticAnimalAdapter(ExoticAnimal a) {
-		super(Integer.parseInt(a.getUniqueId()), a.getAnimalName(), a.getSubSpecies(), a.getYearsOld(), false);
+		super(Integer.parseInt(a.getUniqueId().replaceAll("[^0-9]", "9")), a.getAnimalName(), a.getSubSpecies(), a.getYearsOld(), false);
 		this.exoticAnimal = a;
 	}
 
