@@ -1,12 +1,14 @@
 package mvc.view;
 
-import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ShelterView extends JFrame {
+@SuppressWarnings("deprecation")
+public class ShelterView extends JFrame implements Observer {
 	
 	/**
 	 * 
@@ -54,6 +56,11 @@ public class ShelterView extends JFrame {
 		adoptButton = new JButton("Adopt");
 		adoptButton.setBounds(20, 180, 100, 40);
 		panel.add(adoptButton);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 	}
 
 }
