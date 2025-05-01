@@ -13,6 +13,8 @@ import mvc.model.pets.Pet;
 
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 @SuppressWarnings("deprecation")
 public class ShelterView extends JFrame implements Observer {
@@ -30,6 +32,12 @@ public class ShelterView extends JFrame implements Observer {
 	private JButton viewDetailsButton;
 	private JButton saveButton;
 	private JButton adoptButton;
+	private JComboBox<String> comboBox;
+	private JTextField idTextField;
+	private JTextField nameTextField;
+	private JTextField typeTextField;
+	private JTextField speciesTextField;
+	private JTextField ageTextField;
 	
 	public ShelterView() {
 		initialize();
@@ -47,33 +55,67 @@ public class ShelterView extends JFrame implements Observer {
 		
 		DefaultListModel<Pet> modelList = new DefaultListModel<>();
 		petList = new JList<>(modelList);
-		petList.setBounds(150, 20, 314, 200);
+		petList.setBounds(20, 50, 274, 200);
 		panel.add(petList);
 		
-		addButton = new JButton("Add");
-		addButton.setBounds(20, 20, 100, 40);
+		addButton = new JButton("Add Pet");
+		addButton.setBounds(364, 210, 96, 40);
 		panel.add(addButton);
 		
-		removeButton = new JButton("Remove");
-		removeButton.setBounds(20, 60, 100, 40);
+		removeButton = new JButton("Remove Pet");
+		removeButton.setBounds(162, 310, 132, 40);
 		panel.add(removeButton);
 		
-		viewDetailsButton = new JButton("Details");
-		viewDetailsButton.setBounds(20, 180, 100, 40);
+		viewDetailsButton = new JButton("View Pet Details");
+		viewDetailsButton.setBounds(20, 260, 132, 40);
 		panel.add(viewDetailsButton);
 		
-		saveButton = new JButton("Save");
-		saveButton.setBounds(20, 140, 100, 40);
+		saveButton = new JButton("Save Pet List");
+		saveButton.setBounds(20, 310, 132, 40);
 		panel.add(saveButton);
 		
-		adoptButton = new JButton("Adopt");
-		adoptButton.setBounds(20, 100, 100, 40);
+		adoptButton = new JButton("Adopt Pet");
+		adoptButton.setBounds(162, 260, 132, 40);
 		panel.add(adoptButton);
 		
 		String[] comboBoxOptions = {"Name", "Age", "Species"};
-		JComboBox<String> comboBox = new JComboBox<>(comboBoxOptions);
-		comboBox.setBounds(20, 230, 100, 20);
+		comboBox = new JComboBox<>(comboBoxOptions);
+		comboBox.setBounds(64, 20, 100, 20);
 		panel.add(comboBox);
+		
+		JLabel lblNewLabel = new JLabel("Sort by:");
+		lblNewLabel.setBounds(20, 24, 45, 13);
+		panel.add(lblNewLabel);
+		
+		idTextField = new JTextField();
+		idTextField.setText("Type id");
+		idTextField.setBounds(364, 48, 96, 19);
+		panel.add(idTextField);
+		idTextField.setColumns(10);
+		
+		nameTextField = new JTextField();
+		nameTextField.setText("Type name");
+		nameTextField.setBounds(364, 77, 96, 19);
+		panel.add(nameTextField);
+		nameTextField.setColumns(10);
+		
+		typeTextField = new JTextField();
+		typeTextField.setText("Type type");
+		typeTextField.setBounds(364, 106, 96, 19);
+		panel.add(typeTextField);
+		typeTextField.setColumns(10);
+		
+		speciesTextField = new JTextField();
+		speciesTextField.setText("Type species");
+		speciesTextField.setBounds(364, 135, 96, 19);
+		panel.add(speciesTextField);
+		speciesTextField.setColumns(10);
+		
+		ageTextField = new JTextField();
+		ageTextField.setText("Type age");
+		ageTextField.setBounds(364, 164, 96, 19);
+		panel.add(ageTextField);
+		ageTextField.setColumns(10);
 		
 	}
 	
@@ -95,6 +137,10 @@ public class ShelterView extends JFrame implements Observer {
 	
 	public int[] getMultipleSelectedPets() {
 		return petList.getSelectedIndices();
+	}
+	
+	public void addListenerToViewDetailsButton(ActionListener l) {
+		viewDetailsButton.addActionListener(l);
 	}
 
 	@Override

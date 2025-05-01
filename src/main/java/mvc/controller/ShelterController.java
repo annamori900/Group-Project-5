@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import mvc.model.Shelter;
 import mvc.model.pets.Pet;
+import mvc.view.DetailsView;
 import mvc.view.ShelterView;
 
 public class ShelterController {
 	
 	private Shelter<Pet> model;
 	private ShelterView view;
+	private DetailsView detailsView = null;
 	
 	@SuppressWarnings("deprecation")
 	public ShelterController(Shelter<Pet> model, ShelterView view) {
@@ -23,22 +25,6 @@ public class ShelterController {
 	
 	public void initiate() {
 		view.getFrame().setVisible(true);
-	}
-	
-	public void addPet(Pet pet) {
-		model.getPets().add(pet);
-	}
-	
-	public void removePet(Pet pet) {
-		model.getPets().remove(pet);
-	}
-	
-	public void adoptPet(Pet pet) {
-		if (pet.isAdopted()) {
-			System.out.println(pet.getName() + " has already been adoped.");
-			return;
-		}
-		pet.setAdopted(true);
 	}
 	
 	private class RemoveButtonListener implements ActionListener {
@@ -54,6 +40,17 @@ public class ShelterController {
 				view.getPetList().removeElement(pet);
 				model.getPets().remove(pet);
 			}
+		}
+		
+	}
+	
+	private class ViewDetailsButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			detailsView = new DetailsView();
+			detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
+			detailsView.getFrame().setVisible(true);
 		}
 		
 	}
