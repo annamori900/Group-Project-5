@@ -13,8 +13,7 @@ import mvc.model.pets.ExoticAnimal;
 import mvc.model.pets.Pet;
 import mvc.model.pets.Rabbit;
 
-@SuppressWarnings("deprecation")
-public class Shelter<T extends Pet> extends Observable {
+public class Shelter<T extends Pet> {
 	
 	private ArrayList<T> pets;
 	
@@ -45,28 +44,16 @@ public class Shelter<T extends Pet> extends Observable {
 		return pets;
 	}
 
-//	public void setPets(ArrayList<T> pets) {
-//		this.pets = pets;
-//		setChanged();
-//		notifyObservers();
-//	}
-
 	public void sortByName() {
 		Collections.sort(pets);
-		setChanged();
-		notifyObservers();
 	}
 	
 	public void sortByAge() {
 		pets.sort(new AgeComparator());
-		setChanged();
-		notifyObservers();
 	}
 	
 	public void sortBySpecies() {
 		pets.sort(new SpeciesComparator());
-		setChanged();
-		notifyObservers();
 	}
 
 }

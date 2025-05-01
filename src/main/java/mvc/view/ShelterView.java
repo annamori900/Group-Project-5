@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import mvc.model.Shelter;
 import mvc.model.pets.Pet;
 
 import javax.swing.JList;
@@ -16,8 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-@SuppressWarnings("deprecation")
-public class ShelterView extends JFrame implements Observer {
+public class ShelterView extends JFrame {
 	
 	/**
 	 * 
@@ -78,7 +78,7 @@ public class ShelterView extends JFrame implements Observer {
 		adoptButton.setBounds(162, 260, 132, 40);
 		panel.add(adoptButton);
 		
-		String[] comboBoxOptions = {"Name", "Age", "Species"};
+		String[] comboBoxOptions = {"","Name", "Age", "Species"};
 		comboBox = new JComboBox<>(comboBoxOptions);
 		comboBox.setBounds(64, 20, 100, 20);
 		panel.add(comboBox);
@@ -123,10 +123,6 @@ public class ShelterView extends JFrame implements Observer {
 		return frame;
 	}
 	
-	public void addListenerToRemoveButton(ActionListener l) {
-		removeButton.addActionListener(l);
-	}
-	
 	public DefaultListModel<Pet> getPetList() {
 		return (DefaultListModel<Pet>) petList.getModel();
 	}
@@ -139,12 +135,20 @@ public class ShelterView extends JFrame implements Observer {
 		return petList.getSelectedIndices();
 	}
 	
+	public void showShelterOnList(Shelter<Pet> shelter) {
+		for ( Pet p : shelter.getPets()) {
+			getPetList().removeElement(p);
+		}
+		for ( Pet p : shelter.getPets()) {
+			getPetList().addElement(p);
+		}
+	}
+	
+	public void addListenerToRemoveButton(ActionListener l) {
+		removeButton.addActionListener(l);
+	}
+	
 	public void addListenerToViewDetailsButton(ActionListener l) {
 		viewDetailsButton.addActionListener(l);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 	}
 }

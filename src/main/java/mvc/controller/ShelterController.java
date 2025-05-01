@@ -15,12 +15,12 @@ public class ShelterController {
 	private ShelterView view;
 	private DetailsView detailsView = null;
 	
-	@SuppressWarnings("deprecation")
 	public ShelterController(Shelter<Pet> model, ShelterView view) {
 		this.model = model;
 		this.view = view;
+		this.view.showShelterOnList(model);
 		this.view.addListenerToRemoveButton(new RemoveButtonListener());
-		model.addObserver(view);
+		this.view.addListenerToViewDetailsButton(new ViewDetailsButtonListener());
 	}
 	
 	public void initiate() {
