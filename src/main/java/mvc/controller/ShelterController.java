@@ -21,6 +21,7 @@ public class ShelterController {
 		this.view.showShelterOnList(model);
 		this.view.addListenerToRemoveButton(new RemoveButtonListener());
 		this.view.addListenerToViewDetailsButton(new ViewDetailsButtonListener());
+		this.view.addListenerToComboBox(new ComboBoxListener());
 	}
 	
 	public void initiate() {
@@ -41,7 +42,6 @@ public class ShelterController {
 				model.getPets().remove(pet);
 			}
 		}
-		
 	}
 	
 	private class ViewDetailsButtonListener implements ActionListener {
@@ -52,7 +52,30 @@ public class ShelterController {
 			detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
 			detailsView.getFrame().setVisible(true);
 		}
-		
+	}
+	
+	private class ComboBoxListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch(view.getComboBox().getSelectedItem().toString()) {
+			case "Name":
+				model.sortByName();
+				view.showShelterOnList(model);
+				break;
+			case "Age":
+				model.sortByAge();
+				view.showShelterOnList(model);
+				break;
+			case "Species":
+				model.sortBySpecies();
+				view.showShelterOnList(model);
+				break;
+			default:
+				view.showShelterOnList(model);
+				break;
+			}
+		}
 	}
 
 }

@@ -127,6 +127,10 @@ public class ShelterView extends JFrame {
 		return (DefaultListModel<Pet>) petList.getModel();
 	}
 	
+	public JComboBox<String> getComboBox() {
+		return comboBox;
+	}
+	
 	public int getSelectedPet() {
 		return petList.getSelectedIndex();
 	}
@@ -150,5 +154,9 @@ public class ShelterView extends JFrame {
 	
 	public void addListenerToViewDetailsButton(ActionListener l) {
 		viewDetailsButton.addActionListener(l);
+	}
+	
+	public void addListenerToComboBox(ActionListener l) {
+		comboBox.addActionListener(l);
 	}
 }
