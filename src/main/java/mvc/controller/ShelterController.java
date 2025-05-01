@@ -21,6 +21,7 @@ public class ShelterController {
 		this.view.showShelterOnList(model);
 		this.view.addListenerToRemoveButton(new RemoveButtonListener());
 		this.view.addListenerToViewDetailsButton(new ViewDetailsButtonListener());
+		this.view.addListenerToAdoptButton(new AdoptButtonListener());
 		this.view.addListenerToComboBox(new ComboBoxListener());
 	}
 	
@@ -51,6 +52,19 @@ public class ShelterController {
 			detailsView = new DetailsView();
 			detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
 			detailsView.getFrame().setVisible(true);
+		}
+	}
+	
+	private class AdoptButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (model.getPets().get(view.getSelectedPet()).isAdopted()) {
+				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " is already adopted.");
+			}
+			else {
+				model.getPets().get(view.getSelectedPet()).setAdopted(true);
+			}
 		}
 	}
 	

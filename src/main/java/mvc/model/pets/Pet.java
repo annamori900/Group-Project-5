@@ -63,4 +63,9 @@ public abstract class Pet implements Comparable<Pet> {
 	
 	public abstract String getType();
 
+	@Override
+	public String toString() {
+		return name + ", " + species + ", " + age;
+	}
+
 }

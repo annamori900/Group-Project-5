@@ -156,6 +156,10 @@ public class ShelterView extends JFrame {
 		viewDetailsButton.addActionListener(l);
 	}
 	
+	public void addListenerToAdoptButton(ActionListener l) {
+		adoptButton.addActionListener(l);
+	}
+	
 	public void addListenerToComboBox(ActionListener l) {
 		comboBox.addActionListener(l);
 	}
