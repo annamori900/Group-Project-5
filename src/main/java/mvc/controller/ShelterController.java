@@ -36,10 +36,21 @@ public class ShelterController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Pet pet = view.getPetFromPetTextFields();
-			// TODO check valid input
+
+			for (Pet p : model.getPets()) {
+				if (p.getId() == pet.getId()) {
+					System.out.println("This ID already exists");
+					return;
+				}
+			}
+			if (pet.getAge() < 0) {
+				System.out.println("Pet cannot have age less than 0.");
+				return;
+			}
+			
 			model.getPets().add(pet);
 			view.addPetToPetList(pet);
-			view.showShelterOnList(model);
+			sortListByComboBox();
 			System.out.println(pet.getName() + " has been added to pet list.");
 		}
 	}
@@ -98,23 +109,27 @@ public class ShelterController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			switch(view.getComboBox().getSelectedItem().toString()) {
-			case "Name":
-				model.sortByName();
-				view.showShelterOnList(model);
-				break;
-			case "Age":
-				model.sortByAge();
-				view.showShelterOnList(model);
-				break;
-			case "Species":
-				model.sortBySpecies();
-				view.showShelterOnList(model);
-				break;
-			default:
-				view.showShelterOnList(model);
-				break;
-			}
+			sortListByComboBox();
+		}
+	}
+	
+	private void sortListByComboBox() {
+		switch(view.getComboBox().getSelectedItem().toString()) {
+		case "Name":
+			model.sortByName();
+			view.showShelterOnList(model);
+			break;
+		case "Age":
+			model.sortByAge();
+			view.showShelterOnList(model);
+			break;
+		case "Species":
+			model.sortBySpecies();
+			view.showShelterOnList(model);
+			break;
+		default:
+			view.showShelterOnList(model);
+			break;
 		}
 	}
 
