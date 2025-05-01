@@ -19,14 +19,28 @@ public class ShelterController {
 		this.model = model;
 		this.view = view;
 		this.view.showShelterOnList(model);
+		this.view.addListenerToAddButton(new AddButtonListener());
 		this.view.addListenerToRemoveButton(new RemoveButtonListener());
 		this.view.addListenerToViewDetailsButton(new ViewDetailsButtonListener());
+		this.view.addListenerToSaveButton(new SaveButtonListener());
 		this.view.addListenerToAdoptButton(new AdoptButtonListener());
 		this.view.addListenerToComboBox(new ComboBoxListener());
 	}
 	
 	public void initiate() {
 		view.getFrame().setVisible(true);
+	}
+	
+	private class AddButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Pet pet = view.getPetFromPetTextFields();
+			// TODO check valid input
+			model.getPets().add(pet);
+			view.addPetToPetList(pet);
+			view.showShelterOnList(model);
+		}
 	}
 	
 	private class RemoveButtonListener implements ActionListener {
@@ -52,6 +66,15 @@ public class ShelterController {
 			detailsView = new DetailsView();
 			detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
 			detailsView.getFrame().setVisible(true);
+		}
+	}
+	
+	private class SaveButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	
