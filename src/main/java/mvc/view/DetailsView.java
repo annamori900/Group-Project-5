@@ -22,10 +22,16 @@ public class DetailsView extends JFrame {
 	private JLabel ageLabel;
 	private JLabel adoptedLabel;
 	
+	/**
+	 * This is the default constructor to initialize the Swing GUI
+	 */
 	public DetailsView() {
 		initialize();
 	}
 	
+	/**
+	 * This method initializes the Swing GUI by setting up the frame, panel, and labels.
+	 */
 	public void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Pet Details");
@@ -59,13 +65,20 @@ public class DetailsView extends JFrame {
 		adoptedLabel = new JLabel("Adopted:");
 		adoptedLabel.setBounds(10,85,200,13);
 		panel.add(adoptedLabel);
-		
 	}
 	
+	/**
+	 * This method is a getter for the details view's frame
+	 * @return Returns the JFrame of the details view
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 	
+	/**
+	 * This method updates the text labels with the passed pet's details
+	 * @param pet A Pet object parameter whose details want to be viewed
+	 */
 	public void updateDetails(Pet pet) {
 		idLabel.setText("ID:                 " +  pet.getId());
 		nameLabel.setText("Name:           " + pet.getName());

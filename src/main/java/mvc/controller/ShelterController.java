@@ -20,6 +20,12 @@ public class ShelterController {
 	private ShelterView view;
 	private DetailsView detailsView = null;
 	
+	/**
+	 * This is a parameterized constructor to set the controller's model and view members.
+	 * The constructor also adds the contents of the model to the view's list and adds listener's to the view's interactive elements.
+	 * @param model A Shelter<> object parameter to be the model of the controller
+	 * @param view A ShelterView object parameter to be the view of the controller
+	 */
 	public ShelterController(Shelter<Pet> model, ShelterView view) {
 		this.model = model;
 		this.view = view;
@@ -32,28 +38,40 @@ public class ShelterController {
 		this.view.addListenerToComboBox(new ComboBoxListener());
 	}
 	
+	/**
+	 * This method initiates the Swing GUI to be visible and thus interactive.
+	 */
 	public void initiate() {
 		view.getFrame().setVisible(true);
 	}
 	
 	private class AddButtonListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's add button is interacted with.
+		 * This method adds a pet to the model and view using parameters provided in the view's text fields and prints a dialog to the console.
+		 * If inputs are invalid, there is no change.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Pet pet;
 			
+			// check if any text fields are empty
 			if (view.getIdFromTextField().equals("") ||
 				view.getNameFromTextField().equals("") ||
 				view.getTypeFromTextField().equals("") ||
 				view.getSpeciesFromTextField().equals("") ||
 				view.getAgeFromTextField().equals("")) { return; }
 			
+			// check if ID contains non-digit characters
 			for (char c : view.getIdFromTextField().toCharArray()) {
 	            if (!Character.isDigit(c)) {
 	            	System.out.println("ID cannot contain non-digit values.");
 	                return;
 	            }
 	        }
+			
+			// check if ID matches current ID in shelter
 			for (Pet p : model.getPets()) {
 				if (p.getId() == Integer.parseInt(view.getIdFromTextField())) {
 					System.out.println("ID already exists");
@@ -61,17 +79,21 @@ public class ShelterController {
 				}
 			}
 			
+			// check if age contains non-digit characters
 			for (char c : view.getAgeFromTextField().toCharArray()) {
 	            if (!Character.isDigit(c)) {
 	            	System.out.println("Age cannot contain non-digit values.");
 	                return;
 	            }
 	        }
+			
+			// check if age is less than 0
 			if (Integer.parseInt(view.getAgeFromTextField()) < 0) {
 				System.out.println("Age cannot be less than 0.");
                 return;
 			}
 			
+			// make pet object depending on pet type
 			switch(view.getTypeFromTextField().toLowerCase()) {
 			case "dog":
 				pet = new Dog(Integer.parseInt(view.getIdFromTextField()), view.getNameFromTextField(), view.getSpeciesFromTextField(), Integer.parseInt(view.getAgeFromTextField()), false);
@@ -88,6 +110,7 @@ public class ShelterController {
 				break;
 			}
 			
+			// add pet to model and view
 			model.getPets().add(pet);
 			view.addPetToPetList(pet);
 			sortListByComboBox();
@@ -97,6 +120,11 @@ public class ShelterController {
 	
 	private class RemoveButtonListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's remove button is interacted with.
+		 * This method removes a pet(s) from the model and view using selection on the view's list and prints a dialog to the console.
+		 * If no pets are selected, there is no change.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int[] selectedPets = view.getMultipleSelectedPets();
@@ -114,6 +142,11 @@ public class ShelterController {
 	
 	private class ViewDetailsButtonListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's view details button is interacted with.
+		 * This method uses selection on the view's list to make visible a selected pet's details on a new Swing GUI window.
+		 * If no pet is selected, no window is made visible.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
@@ -138,6 +171,12 @@ public class ShelterController {
 	
 	private class AdoptButtonListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's adopt button is interacted with.
+		 * This method uses selection on the view's list and clicking the button to change a pet's status to be adopted and prints a dialog to the console.
+		 * If no pets are selected, there is no change.
+		 * If the selected pet is already adopted, a dialog is printed to the console.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
@@ -156,12 +195,21 @@ public class ShelterController {
 	
 	private class ComboBoxListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's combo box is interacted with.
+		 * This method uses selection on the view's combo box to change the sorting order of the view's list.
+		 * Initially the blank selection is chosen and the pets are displayed in the order they were added to the shelter.
+		 * If the blank selection is chosen after choosing a sorting method, the pets are displayed in the order most recently chosen.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			sortListByComboBox();
 		}
 	}
 	
+	/**
+	 * This is a helper method that sorts the pets in the view's list depending on the selected value of the combo box.
+	 */
 	private void sortListByComboBox() {
 		switch(view.getComboBox().getSelectedItem().toString()) {
 		case "Name":
