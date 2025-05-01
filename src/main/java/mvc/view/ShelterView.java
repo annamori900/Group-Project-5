@@ -8,13 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import mvc.model.Shelter;
-import mvc.model.adapter.ExoticAnimalAdapter;
-import mvc.model.pets.Cat;
-import mvc.model.pets.Dog;
-import mvc.model.pets.ExoticAnimal;
 import mvc.model.pets.Pet;
-import mvc.model.pets.Rabbit;
-
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -154,40 +148,24 @@ public class ShelterView extends JFrame {
 		return comboBox;
 	}
 	
-	public Pet getPetFromPetTextFields() {
-		Pet pet;
-		switch(typeTextField.getText().toLowerCase()) {
-		case "dog":
-			pet = new Dog(Integer.parseInt(idTextField.getText()),
-				      nameTextField.getText(),
-				      speciesTextField.getText(),
-				      Integer.parseInt(ageTextField.getText()),
-				      false);
-			break;
-		case "cat":
-			pet = new Cat(Integer.parseInt(idTextField.getText()),
-				      nameTextField.getText(),
-				      speciesTextField.getText(),
-				      Integer.parseInt(ageTextField.getText()),
-				      false);
-			break;
-		case "rabbit":
-			pet = new Rabbit(Integer.parseInt(idTextField.getText()),
-				             nameTextField.getText(),
-				             speciesTextField.getText(),
-				             Integer.parseInt(ageTextField.getText()),
-				             false);
-			break;
-		default:
-			ExoticAnimal ea = new ExoticAnimal(idTextField.getText(),
-		                                       nameTextField.getText(),
-		                                       typeTextField.getText(),
-		                                       speciesTextField.getText(),
-		                                       Integer.parseInt(ageTextField.getText()));
-			pet = new ExoticAnimalAdapter(ea);
-			break;
-		}
-		return pet;
+	public String getIdFromTextField() {
+		return idTextField.getText();
+	}
+	
+	public String getNameFromTextField() {
+		return nameTextField.getText();
+	}
+	
+	public String getTypeFromTextField() {
+		return typeTextField.getText();
+	}
+	
+	public String getSpeciesFromTextField() {
+		return speciesTextField.getText();
+	}
+	
+	public String getAgeFromTextField() {
+		return ageTextField.getText();
 	}
 	
 	public int getSelectedPet() {

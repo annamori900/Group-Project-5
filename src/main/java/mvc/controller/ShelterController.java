@@ -5,7 +5,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import mvc.model.Shelter;
+import mvc.model.adapter.ExoticAnimalAdapter;
+import mvc.model.pets.Cat;
+import mvc.model.pets.Dog;
+import mvc.model.pets.ExoticAnimal;
 import mvc.model.pets.Pet;
+import mvc.model.pets.Rabbit;
 import mvc.view.DetailsView;
 import mvc.view.ShelterView;
 
@@ -35,17 +40,52 @@ public class ShelterController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Pet pet = view.getPetFromPetTextFields();
-
+			Pet pet;
+			
+			if (view.getIdFromTextField().equals("") ||
+				view.getNameFromTextField().equals("") ||
+				view.getTypeFromTextField().equals("") ||
+				view.getSpeciesFromTextField().equals("") ||
+				view.getAgeFromTextField().equals("")) { return; }
+			
+			for (char c : view.getIdFromTextField().toCharArray()) {
+	            if (!Character.isDigit(c)) {
+	            	System.out.println("ID cannot contain non-digit values.");
+	                return;
+	            }
+	        }
 			for (Pet p : model.getPets()) {
-				if (p.getId() == pet.getId()) {
-					System.out.println("This ID already exists");
+				if (p.getId() == Integer.parseInt(view.getIdFromTextField())) {
+					System.out.println("ID already exists");
 					return;
 				}
 			}
-			if (pet.getAge() < 0) {
-				System.out.println("Pet cannot have age less than 0.");
-				return;
+			
+			for (char c : view.getAgeFromTextField().toCharArray()) {
+	            if (!Character.isDigit(c)) {
+	            	System.out.println("Age cannot contain non-digit values.");
+	                return;
+	            }
+	        }
+			if (Integer.parseInt(view.getAgeFromTextField()) < 0) {
+				System.out.println("Age cannot be less than 0.");
+                return;
+			}
+			
+			switch(view.getTypeFromTextField().toLowerCase()) {
+			case "dog":
+				pet = new Dog(Integer.parseInt(view.getIdFromTextField()), view.getNameFromTextField(), view.getSpeciesFromTextField(), Integer.parseInt(view.getAgeFromTextField()), false);
+				break;
+			case "cat":
+				pet = new Cat(Integer.parseInt(view.getIdFromTextField()), view.getNameFromTextField(), view.getSpeciesFromTextField(), Integer.parseInt(view.getAgeFromTextField()), false);
+				break;
+			case "rabbit":
+				pet = new Rabbit(Integer.parseInt(view.getIdFromTextField()), view.getNameFromTextField(), view.getSpeciesFromTextField(), Integer.parseInt(view.getAgeFromTextField()), false);
+				break;
+			default:
+				ExoticAnimal ea = new ExoticAnimal(view.getIdFromTextField(), view.getNameFromTextField(), view.getTypeFromTextField(), view.getSpeciesFromTextField(), Integer.parseInt(view.getAgeFromTextField()));
+				pet = new ExoticAnimalAdapter(ea);
+				break;
 			}
 			
 			model.getPets().add(pet);
@@ -76,9 +116,14 @@ public class ShelterController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			detailsView = new DetailsView();
-			detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
-			detailsView.getFrame().setVisible(true);
+			try {
+				detailsView = new DetailsView();
+				detailsView.updateDetails(model.getPets().get(view.getSelectedPet()));
+				detailsView.getFrame().setVisible(true);
+			} catch (Exception x) {
+				
+			}
+			
 		}
 	}
 	
@@ -95,12 +140,16 @@ public class ShelterController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (model.getPets().get(view.getSelectedPet()).isAdopted()) {
-				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has already been adopted.");
-			}
-			else {
-				model.getPets().get(view.getSelectedPet()).setAdopted(true);
-				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has just been adopted.");
+			try {
+				if (model.getPets().get(view.getSelectedPet()).isAdopted()) {
+					System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has already been adopted.");
+				}
+				else {
+					model.getPets().get(view.getSelectedPet()).setAdopted(true);
+					System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has just been adopted.");
+				}
+			} catch (Exception x) {
+				
 			}
 		}
 	}

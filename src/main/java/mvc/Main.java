@@ -22,14 +22,3 @@ public class Main {
 	}
 
 }
-
-/* To-do list:
- * 
- * Load pets&exotic animals when program starts using GSON
- * 
- * Add pet (validate inputs)
- * Save pet list back to JSON file
- * 
- * SOLID principles
- * 
- */
