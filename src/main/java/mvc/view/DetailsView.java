@@ -2,12 +2,8 @@ package mvc.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-import mvc.model.Shelter;
 import mvc.model.pets.Pet;
 
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 
 public class DetailsView extends JFrame {
@@ -33,35 +29,35 @@ public class DetailsView extends JFrame {
 	public void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Pet Details");
-		frame.setDefaultCloseOperation(HIDE_ON_CLOSE); // make so it doesnt close shelterview too
-		frame.setBounds(100, 100, 500, 400);
+		frame.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		frame.setBounds(100, 100, 250, 150);
 		
 		panel = new JPanel();
 		frame.setContentPane(panel);
 		frame.getContentPane().setLayout(null);
 		
 		idLabel = new JLabel("ID:");
-		idLabel.setBounds(100,20,300,100);
+		idLabel.setBounds(10,10,200,13);
 		panel.add(idLabel);
 		
 		nameLabel = new JLabel("Name:");
-		nameLabel.setBounds(100, 40,300,100);
+		nameLabel.setBounds(10,25,200,13);
 		panel.add(nameLabel);
 		
 		typeLabel = new JLabel("Type:");
-		typeLabel.setBounds(100, 60,300,100);
+		typeLabel.setBounds(10,40,200,13);
 		panel.add(typeLabel);
 		
 		speciesLabel = new JLabel("Species:");
-		speciesLabel.setBounds(100,80,300,100);
+		speciesLabel.setBounds(10,55,200,13);
 		panel.add(speciesLabel);
 		
 		ageLabel = new JLabel("Age:");
-		ageLabel.setBounds(100,100,300,100);
+		ageLabel.setBounds(10,70,200,13);
 		panel.add(ageLabel);
 		
 		adoptedLabel = new JLabel("Adopted:");
-		adoptedLabel.setBounds(100,120,300,100);
+		adoptedLabel.setBounds(10,85,200,13);
 		panel.add(adoptedLabel);
 		
 	}

@@ -2,7 +2,6 @@ package mvc.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Observable;
 
 import mvc.model.adapter.ExoticAnimalAdapter;
 import mvc.model.comparators.AgeComparator;
