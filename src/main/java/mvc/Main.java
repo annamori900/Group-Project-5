@@ -27,10 +27,9 @@ public class Main {
  * 
  * Load pets&exotic animals when program starts using GSON
  * 
- * Add pet (listener to button, text fields, validate inputs)
- * Adopt pet (prompt message on GUI or in console?)
- * Add dialogs for adding&viewing details? (whatever that means, i guess in console)
+ * Add pet (validate inputs)
  * Save pet list back to JSON file
  * 
  * SOLID principles
+ * 
  */

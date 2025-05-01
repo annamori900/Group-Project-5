@@ -40,6 +40,7 @@ public class ShelterController {
 			model.getPets().add(pet);
 			view.addPetToPetList(pet);
 			view.showShelterOnList(model);
+			System.out.println(pet.getName() + " has been added to pet list.");
 		}
 	}
 	
@@ -48,13 +49,14 @@ public class ShelterController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int[] selectedPets = view.getMultipleSelectedPets();
-			ArrayList<Pet> list = new ArrayList<>();
+			ArrayList<Pet> toBeRemovedList = new ArrayList<>();
 			for (int i = 0; i < selectedPets.length; i++) {
-				list.add(view.getPetList().get(selectedPets[i]));
+				toBeRemovedList.add(view.getPetList().get(selectedPets[i]));
 			}
-			for (Pet pet : list) {
+			for (Pet pet : toBeRemovedList) {
 				view.getPetList().removeElement(pet);
 				model.getPets().remove(pet);
+				System.out.println(pet.getName() + "has been removed from pet list.");
 			}
 		}
 	}
@@ -83,10 +85,11 @@ public class ShelterController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (model.getPets().get(view.getSelectedPet()).isAdopted()) {
-				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " is already adopted.");
+				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has already been adopted.");
 			}
 			else {
 				model.getPets().get(view.getSelectedPet()).setAdopted(true);
+				System.out.println(model.getPets().get(view.getSelectedPet()).getName() + " has just been adopted.");
 			}
 		}
 	}

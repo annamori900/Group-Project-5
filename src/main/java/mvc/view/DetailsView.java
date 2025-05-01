@@ -33,7 +33,7 @@ public class DetailsView extends JFrame {
 	public void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Pet Details");
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE); // make so it doesnt close shelterview too
+		frame.setDefaultCloseOperation(HIDE_ON_CLOSE); // make so it doesnt close shelterview too
 		frame.setBounds(100, 100, 500, 400);
 		
 		panel = new JPanel();
