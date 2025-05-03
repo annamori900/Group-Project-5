@@ -2,7 +2,12 @@ package mvc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mvc.model.Shelter;
 import mvc.model.adapter.ExoticAnimalAdapter;
@@ -157,10 +162,30 @@ public class ShelterController {
 	
 	private class SaveButtonListener implements ActionListener {
 
+		/**
+		 * This method implements the action taken by the controller when the view's save button is interacted with.
+		 * This method converts data stored in a shelter to JSON format and saves it to file.
+		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+		public void actionPerformed(ActionEvent a) {
 			
+			ArrayList<Pet> pets = model.getPets();
+			
+	        LocalDateTime now = LocalDateTime.now();
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+	        
+			String filename = System.getProperty("user.dir") + "\\src\\main\\resources\\" + now.format(formatter) + "_pets.json";
+			
+	        File file = new File(filename);
+			
+	        ObjectMapper mapper = new ObjectMapper();
+	        try {
+	            mapper.writerWithDefaultPrettyPrinter().writeValue(file, pets);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+			
+	        System.out.println("Pet list saved.");
 		}
 	}
 	
