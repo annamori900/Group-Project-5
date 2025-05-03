@@ -2,12 +2,14 @@ package mvc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import mvc.model.Shelter;
 import mvc.model.adapter.ExoticAnimalAdapter;
@@ -176,14 +178,13 @@ public class ShelterController {
 	        
 			String filename = System.getProperty("user.dir") + "\\src\\main\\resources\\" + now.format(formatter) + "_pets.json";
 			
-	        File file = new File(filename);
-			
-	        ObjectMapper mapper = new ObjectMapper();
-	        try {
-	            mapper.writerWithDefaultPrettyPrinter().writeValue(file, pets);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+	        try (FileWriter writer = new FileWriter(filename)) {
+	            gson.toJson(pets, writer);
+	        } catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 	        System.out.println("Pet list saved.");
 		}
