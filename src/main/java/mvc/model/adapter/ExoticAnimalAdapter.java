@@ -8,7 +8,8 @@ public class ExoticAnimalAdapter extends Pet {
 	private ExoticAnimal exoticAnimal;
 
 	/**
-	 * This is a parameterized constructor to set the member values for the ExoticAnimalAdapter object
+	 * This is a parameterized constructor to set the member values for the ExoticAnimalAdapter object.
+	 * Since the ExoticAnimal object has a string member for uniqueId, replace all non-digit characters with 9
 	 * @param a An ExoticAnimal object parameter to be adapted to act as a Pet object
 	 */
 	public ExoticAnimalAdapter(ExoticAnimal a) {
