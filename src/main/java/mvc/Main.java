@@ -1,17 +1,18 @@
 package mvc;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import mvc.controller.ShelterController;
-import mvc.jsonParser.JSONParser;
+import mvc.jsonParser.*;
 import mvc.model.Shelter;
 import mvc.model.pets.*;
 import mvc.view.ShelterView;
@@ -26,31 +27,35 @@ public class Main {
 				
 				// Initiates a shelter and gets pet list to load from file
 		        Shelter<Pet> shelter = new Shelter<>();
-		        ArrayList<Pet> pets = shelter.getPets();
+		        ArrayList<Pet> shelterPets = shelter.getPets();
 				
 		        // Gets filename of starting files to load
 				String regularPetFile = System.getProperty("user.dir") + "\\src\\main\\resources\\pets.json";
 				String exoticPetFile = System.getProperty("user.dir") + "\\src\\main\\resources\\exotic_animals.json";
-				
-				try {
-					
-			        ObjectMapper mapper = new ObjectMapper();
 
-			        // Load regular pets JSON from file and parse
-			        File file = new File(regularPetFile);
-			        JsonNode root = mapper.readTree(file);
-			        JSONParser.regularPet(root, pets);
-			        
-			        // Load exotic pets JSON from file and parse
-			        file = new File(exoticPetFile);
-			        root = mapper.readTree(file);
-			        JSONParser.exoticPet(root, pets);
+		        Gson gson = new Gson();
 
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		        // Parse regular pet file
+		        try (FileReader reader = new FileReader(regularPetFile)) {
+		        	Type userListType = new TypeToken<List<RegularPet>>() {}.getType();
+		        	List<RegularPet> pets = gson.fromJson(reader, userListType);
+		        	for(RegularPet pet : pets) {
+		        		pet.parser(shelterPets);
+		        	}
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        
+		        // Parse imported exotic animal file
+		        try (FileReader reader = new FileReader(exoticPetFile)) {
+		        	Type userListType = new TypeToken<List<ExoticPet>>() {}.getType();
+		        	List<ExoticPet> pets = gson.fromJson(reader, userListType);
+		        	for(ExoticPet pet : pets) {
+		        		pet.parser(shelterPets);
+		        	}
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 				
 				// Creates controller with loaded shelter animal list
 				ShelterController controller = new ShelterController(shelter, new ShelterView());
