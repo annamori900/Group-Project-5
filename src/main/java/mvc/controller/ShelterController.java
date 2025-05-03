@@ -6,13 +6,8 @@ import java.util.ArrayList;
 
 import mvc.model.Shelter;
 import mvc.model.adapter.ExoticAnimalAdapter;
-import mvc.model.pets.Cat;
-import mvc.model.pets.Dog;
-import mvc.model.pets.ExoticAnimal;
-import mvc.model.pets.Pet;
-import mvc.model.pets.Rabbit;
-import mvc.view.DetailsView;
-import mvc.view.ShelterView;
+import mvc.model.pets.*;
+import mvc.view.*;
 
 public class ShelterController {
 	
@@ -135,7 +130,7 @@ public class ShelterController {
 			for (Pet pet : toBeRemovedList) {
 				view.getPetList().removeElement(pet);
 				model.getPets().remove(pet);
-				System.out.println(pet.getName() + "has been removed from pet list.");
+				System.out.println(pet.getName() + " has been removed from pet list.");
 			}
 		}
 	}
